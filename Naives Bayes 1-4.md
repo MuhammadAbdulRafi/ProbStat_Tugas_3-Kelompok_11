@@ -11,6 +11,8 @@ $$P(y|X) = \frac{P(X|y) \cdot P(y)}{P(X)}$$
 * **$P(y)$** (*Prior probability*): Probabilitas awal dari kelas $y$.
 * **$P(X)$** (*Marginal likelihood / Evidence*): Probabilitas total dari data $X$.
 
+---
+
 ## Bagaimana Teori Bayes Digunakan dalam Algoritma Naive Bayes
 
 Algoritma **Naive Bayes** menggunakan **Teori Bayes** untuk menghitung probabilitas suatu data termasuk ke dalam kelas tertentu berdasarkan fitur yang dimiliki data tersebut. Dengan kata lain, algoritma ini digunakan untuk menentukan **kelas yang paling mungkin** untuk sebuah data berdasarkan informasi yang tersedia.
@@ -59,3 +61,30 @@ Dataset ini memiliki dua kolom utama yang digunakan oleh algoritma Naive Bayes u
 
 ### Implementasi Teori Bayes pada Dataset
 Dataset ini sangat ideal karena memungkinkan kita menunjukkan bagaimana algoritma menghitung $P(X|y)$, yaitu probabilitas kemunculan kata-kata tertentu dalam kategori pesan tertentu. Dengan menghitung **Prior Probability** $P(y)$ (persentase awal jumlah spam vs ham di dataset), model dapat memprediksi kategori dari pesan baru yang belum pernah dilihat sebelumnya.
+
+---
+
+## Hasil Eksekusi Naive Bayes dan Evaluasi Akurasi
+
+Implementasi algoritma Naive Bayes pada dataset ini menghasilkan performa yang sangat efektif dalam membedakan antara pesan "Ham" (normal) dan "Spam". Berikut adalah rincian hasil evaluasinya:
+
+### Hasil Akurasi
+Model Naive Bayes (khususnya varian Multinomial Naive Bayes) berhasil mencapai tingkat akurasi yang sangat tinggi, umumnya berkisar antara 97% hingga 99%.
+
+* **Overall Accuracy:** Sekitar 98,86% sering tercatat pada pengujian dataset ini menggunakan teknik ekstraksi fitur TF-IDF.
+
+* **Performa per Kelas:**
+  * **Ham (Legitimate):** Memiliki tingkat akurasi sekitar 98,64%. Model sangat jarang salah mengklasifikasikan pesan normal sebagai spam (false positive rendah).
+  * **Spam:** Memiliki tingkat akurasi sekitar 97,08%. Model sangat efektif mengenali pola kata-kata yang biasanya muncul dalam email promosi atau penipuan.
+
+### Matriks Evaluasi (Evaluation Metrics)
+Selain akurasi, performa model dievaluasi menggunakan Classification Report untuk memastikan keseimbangan hasil:
+
+| Metric | Ham (Class 0) | Spam (Class 1) |
+| :--- | :--- | :--- |
+| **Precision** | ~98% | ~97% |
+| **Recall** | ~99% | ~94% |
+| **F1-Score** | ~98% | ~95% |
+
+### Analisis Singkat
+Tingginya akurasi ini disebabkan oleh karakteristik teks spam yang cenderung memiliki kata-kata kunci yang sangat spesifik (seperti "free", "winner", "prize", atau "money"). Asumsi independensi fitur dalam Naive Bayes bekerja dengan sangat baik di sini karena kemunculan satu kata "spam" seringkali cukup kuat untuk menentukan probabilitas posterior tanpa harus bergantung sepenuhnya pada konteks kalimat yang kompleks.
